@@ -1,0 +1,6 @@
+function getCart(){let t=localStorage.getItem("cart");return t?JSON.parse(t):[]}function saveCart(t){localStorage.setItem("cart",JSON.stringify(t))}function updateCart(){let t=document.getElementById("cart-items"),e=document.getElementById("total-price"),n=document.getElementById("cart-count"),a=getCart();t.innerHTML="";let r=0;a.forEach((e,n)=>{r+=e.price,t.innerHTML+=`
+    <li class="cart-item">
+        ${e.name} - $${e.price.toFixed(3)}
+        <button onclick="removeFromCart(${n})">Eliminar</button>
+    </li>
+`}),e.textContent=r.toFixed(3),n.textContent=a.length}function addToCart(t,e){let n=getCart();n.push({name:t,price:e}),saveCart(n),updateCart()}function removeFromCart(t){let e=getCart();e.splice(t,1),saveCart(e),updateCart()}function clearCart(){saveCart([]),updateCart()}function toggleCart(){let t=document.getElementById("cart-popup");t.style.display="block"===t.style.display?"none":"block"}document.addEventListener("DOMContentLoaded",function(){let t=document.querySelector(".menu-button"),e=document.getElementById("menu");t.addEventListener("click",function(){e.classList.toggle("active")})}),window.onload=updateCart;
